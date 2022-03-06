@@ -28,7 +28,7 @@ def send_eth():
             from_account = item.from_account
             to_account = item.to_account
             private_key = item.private_key
-            infura_url = f"https://{item.eth_type}.infura.io/v3/221b904604be42689d6c697d1654c2fa"
+            infura_url = item.project_id
             web3 = Web3(Web3.HTTPProvider(infura_url))
             balance = web3.eth.get_balance(from_account)
             #  get the gas estimate with the gas and the curren balance
@@ -58,7 +58,7 @@ def send_eth2():
         from_account = config('FROM_ACCOUNT')
         to_account = config('TO_ACCOUNT')
         private_key = config('PRIVATE_KEY')
-        infura_url = "https://kovan.infura.io/v3/221b904604be42689d6c697d1654c2fa"
+        infura_url = "https://mainnet.infura.io/v3/221b904604be42689d6c697d1654c2fa"
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
         #  get the gas estimate with the gas and the curren balance
@@ -80,3 +80,5 @@ def send_eth2():
         print(web3.toHex(tx_hash))
     except Exception as a:
         print(a)
+
+
