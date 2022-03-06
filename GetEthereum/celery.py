@@ -17,9 +17,13 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 app.conf.beat_schedule = {
-    'add-every-60-seconds': {
+    'add-every-30-seconds_db': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 1,
+        'schedule': 5,
+    },
+    'add-every-30-seconds': {
+        'task': 'fetch_api.tasks.send_eth2',
+        'schedule': 3,
     }
 }
 

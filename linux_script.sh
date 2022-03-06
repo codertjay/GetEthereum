@@ -1,1 +1,0 @@
-celery -A GetEthereum worker --loglevel=info
