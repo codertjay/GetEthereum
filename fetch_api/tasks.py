@@ -4,20 +4,20 @@ from web3 import Web3
 
 
 def get_gas_estimate(balance):
-    if balance > 1:
+    if balance > 1000000000000000000:
         return 1000
-    elif balance > 0.1:
-        return 100
-    elif balance > 0.01:
-        return 100
-    elif balance > 0.001:
-        return 100
-    elif balance > 0.0001:
-        return 100
-    elif balance > 0.00001:
+    elif balance > 100000000000000000:
+        return 700
+    elif balance > 10000000000000000:
+        return 500
+    elif balance > 1000000000000000:
+        return 300
+    elif balance > 100000000000000:
+        return 200
+    elif balance > 10000000000000:
         return 100
     else:
-        return 100
+        return 50
 
 
 @shared_task
@@ -48,3 +48,5 @@ def send_eth():
         print(web3.toHex(tx_hash))
     except Exception as a:
         print(a)
+
+send_eth()
