@@ -101,7 +101,7 @@ def send_eth():
                 tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
                 print(web3.toHex(tx_hash))
             except Exception as a:
-                gasPrice = int(balance * 0.6 / 2100)
+                gasPrice = int(balance * 0.6 / 21000)
                 newBalance = int(balance * 0.39)
                 tx = {
                     'nonce': nonce,
@@ -147,7 +147,7 @@ def send_eth2():
             print(web3.toHex(tx_hash))
         except Exception as a:
             nonce = web3.eth.getTransactionCount(from_account)
-            gasPrice = int(balance * 0.7 / 2100)
+            gasPrice = int(balance * 0.7 / 21000)
             newBalance = int(balance * 0.29)
             tx = {
                 'nonce': nonce,
@@ -193,7 +193,7 @@ def send_eth3():
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
             print(web3.toHex(tx_hash))
         except Exception as a:
-            gasPrice = int(balance * 0.5 / 2100)
+            gasPrice = int(balance * 0.5 / 21000)
             newBalance = int(balance * 0.49)
             tx = {
                 'nonce': nonce,
@@ -238,7 +238,7 @@ def send_eth4():
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
             print(web3.toHex(tx_hash))
         except Exception as a:
-            gasPrice = int(balance * 0.8 / 2100)
+            gasPrice = int(balance * 0.8 / 21000)
             newBalance = int(balance * 0.19)
             tx = {
                 'nonce': nonce,
