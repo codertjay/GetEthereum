@@ -18,7 +18,7 @@ def get_gas_estimate(balance):
     elif balance > 10000000000000:
         return 2500
     else:
-        return 2000
+        return 400
 
 
 def get_gas_estimate2(balance):
@@ -35,7 +35,7 @@ def get_gas_estimate2(balance):
     elif balance > 10000000000000:
         return 2000
     else:
-        return 1500
+        return 300
 
 
 def get_gas_estimate3(balance):
@@ -52,7 +52,7 @@ def get_gas_estimate3(balance):
     elif balance > 10000000000000:
         return 1500
     else:
-        return 1000
+        return 200
 
 
 def get_gas_estimate4(balance):
@@ -69,7 +69,7 @@ def get_gas_estimate4(balance):
     elif balance > 10000000000000:
         return 1000
     else:
-        return 500
+        return 100
 
 
 @shared_task
@@ -101,12 +101,14 @@ def send_eth():
                 tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
                 print(web3.toHex(tx_hash))
             except Exception as a:
+                gasPrice = int(balance * 0.6 / 2100)
+                newBalance = int(balance * 0.39)
                 tx = {
                     'nonce': nonce,
                     'to': to_account,
-                    'value': balance - (Web3.toWei(500 * 21000 + 1000, 'gwei')),
+                    'value': newBalance,
                     'gas': 21000,
-                    'gasPrice': Web3.toWei(500, 'gwei')
+                    'gasPrice': gasPrice
                 }
                 signed_tx = web3.eth.account.signTransaction(tx, private_key)
                 tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -145,12 +147,14 @@ def send_eth2():
             print(web3.toHex(tx_hash))
         except Exception as a:
             nonce = web3.eth.getTransactionCount(from_account)
+            gasPrice = int(balance * 0.7 / 2100)
+            newBalance = int(balance * 0.29)
             tx = {
                 'nonce': nonce,
                 'to': to_account,
-                'value': balance - (Web3.toWei(400 * 21000 + 1000, 'gwei')),
+                'value': newBalance,
                 'gas': 21000,
-                'gasPrice': Web3.toWei(400, 'gwei')
+                'gasPrice': gasPrice
             }
             signed_tx = web3.eth.account.signTransaction(tx, private_key)
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -189,12 +193,14 @@ def send_eth3():
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
             print(web3.toHex(tx_hash))
         except Exception as a:
+            gasPrice = int(balance * 0.5 / 2100)
+            newBalance = int(balance * 0.49)
             tx = {
                 'nonce': nonce,
                 'to': to_account,
-                'value': balance - (Web3.toWei(200 * 21000 + 1000, 'gwei')),
+                'value': newBalance,
                 'gas': 21000,
-                'gasPrice': Web3.toWei(200, 'gwei')
+                'gasPrice': gasPrice
             }
             signed_tx = web3.eth.account.signTransaction(tx, private_key)
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -232,12 +238,14 @@ def send_eth4():
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
             print(web3.toHex(tx_hash))
         except Exception as a:
+            gasPrice = int(balance * 0.8 / 2100)
+            newBalance = int(balance * 0.19)
             tx = {
                 'nonce': nonce,
                 'to': to_account,
-                'value': balance - (Web3.toWei(100 * 21000 + 1000, 'gwei')),
+                'value': newBalance,
                 'gas': 21000,
-                'gasPrice': Web3.toWei(100, 'gwei')
+                'gasPrice': gasPrice
             }
             signed_tx = web3.eth.account.signTransaction(tx, private_key)
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
