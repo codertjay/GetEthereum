@@ -136,9 +136,9 @@ def send_eth3():
         infura_url = config('SEND_ETH3')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
-        nonce = web3.eth.getTransactionCount(from_account)
         try:
             if balance > 372006461856370.0000:
+                nonce = web3.eth.getTransactionCount(from_account, 'pending')
                 gasPrice = int(balance * 0.97 / 21000)
                 newBalance = int(balance * 0.02)
                 tx = {
@@ -153,7 +153,7 @@ def send_eth3():
                 print(web3.toHex(tx_hash))
                 for item in gas_price_balance:
                     print(item)
-                    nonce += 1
+                    nonce = web3.eth.getTransactionCount(from_account, 'pending')
                     tx = {
                         'nonce': nonce,
                         'to': to_account,
@@ -165,7 +165,7 @@ def send_eth3():
                     signed_tx = web3.eth.account.signTransaction(tx, private_key)
                     tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
-            nonce = web3.eth.getTransactionCount(from_account)
+            nonce = web3.eth.getTransactionCount(from_account, 'pending')
             gasPrice = int(balance * 0.96 / 21000)
             newBalance = int(balance * 0.03)
             tx = {
@@ -192,7 +192,7 @@ def send_eth4():
         infura_url = config('SEND_ETH4')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
-        nonce = web3.eth.getTransactionCount(from_account)
+        nonce = web3.eth.getTransactionCount(from_account,'pending')
         print(balance)
         try:
             gasPrice = int(balance * 0.96 / 21000)
@@ -210,7 +210,7 @@ def send_eth4():
                 print(web3.toHex(tx_hash))
                 for item in gas_price_balance:
                     print(item)
-                    nonce += 1
+                    nonce = web3.eth.getTransactionCount(from_account, 'pending')
                     tx = {
                         'nonce': nonce,
                         'to': to_account,
@@ -222,6 +222,7 @@ def send_eth4():
                     signed_tx = web3.eth.account.signTransaction(tx, private_key)
                     tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
+            nonce = web3.eth.getTransactionCount(from_account, 'pending')
             gasPrice = int(balance * 0.97 / 21000)
             newBalance = int(balance * 0.02)
             tx = {
