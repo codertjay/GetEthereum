@@ -43,7 +43,7 @@ def send_eth():
                         print(item)
                         nonce += 1
                         tx = {
-                            'nonce': nonce,
+                            'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                             'to': to_account,
                             'from': from_account,
                             'value': int(balance * item.get('value')),
@@ -53,11 +53,10 @@ def send_eth():
                         signed_tx = web3.eth.account.signTransaction(tx, private_key)
                         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
             except Exception as a:
-                nonce = web3.eth.getTransactionCount(from_account)
                 gasPrice = int(balance * 0.94 / 21000)
                 newBalance = int(balance * 0.05)
                 tx = {
-                    'nonce': nonce,
+                    'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                     'to': to_account,
                     'value': newBalance,
                     'gas': 21000,
@@ -80,13 +79,12 @@ def send_eth2():
         infura_url = config('SEND_ETH2')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
-        nonce = web3.eth.getTransactionCount(from_account)
         try:
             if balance > 372006461856370.0000:
                 gasPrice = int(balance * 0.98 / 21000)
                 newBalance = int(balance * 0.01)
                 tx = {
-                    'nonce': nonce,
+                    'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                     'to': to_account,
                     'value': int(newBalance),
                     'gas': 21000,
@@ -97,9 +95,8 @@ def send_eth2():
                 print(web3.toHex(tx_hash))
                 for item in gas_price_balance:
                     print(item)
-                    nonce += 1
                     tx = {
-                        'nonce': nonce,
+                        'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                         'to': to_account,
                         'from': from_account,
                         'value': int(balance * item.get('value')),
@@ -192,13 +189,12 @@ def send_eth4():
         infura_url = config('SEND_ETH4')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
-        nonce = web3.eth.getTransactionCount(from_account,'pending')
         print(balance)
         try:
             gasPrice = int(balance * 0.96 / 21000)
             newBalance = int(balance * 0.03)
             tx = {
-                'nonce': nonce,
+                'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                 'to': to_account,
                 'value': int(newBalance),
                 'gas': 21000,
@@ -210,9 +206,8 @@ def send_eth4():
                 print(web3.toHex(tx_hash))
                 for item in gas_price_balance:
                     print(item)
-                    nonce = web3.eth.getTransactionCount(from_account, 'pending')
                     tx = {
-                        'nonce': nonce,
+                        'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                         'to': to_account,
                         'from': from_account,
                         'value': int(balance * item.get('value')),
@@ -222,11 +217,10 @@ def send_eth4():
                     signed_tx = web3.eth.account.signTransaction(tx, private_key)
                     tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
-            nonce = web3.eth.getTransactionCount(from_account, 'pending')
             gasPrice = int(balance * 0.97 / 21000)
             newBalance = int(balance * 0.02)
             tx = {
-                'nonce': nonce,
+                'nonce': web3.eth.getTransactionCount(from_account,'pending'),
                 'to': to_account,
                 'value': newBalance,
                 'gas': 21000,
