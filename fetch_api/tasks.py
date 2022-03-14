@@ -9,7 +9,7 @@ gas_price_balance = [
         'value': 0.001,
     }, {
         'gasPrice': 0.99,
-        'value': 0.0009,
+        'value': 0.0008,
     },
 ]
 
@@ -18,40 +18,36 @@ gas_price_balance = [
 def send_eth():
     try:
         for item in EthereumAccounts.objects.all():
-            from_account = Web3.toChecksumAddress(item.from_account)
-            to_account = Web3.toChecksumAddress(item.to_account)
+            from_account = item.from_account
+            to_account = item.to_account
             private_key = item.private_key
             infura_url = item.project_id
             web3 = Web3(Web3.HTTPProvider(infura_url))
             balance = web3.eth.get_balance(from_account)
             nonce = web3.eth.getTransactionCount(from_account)
             try:
-                if balance > 372006461856370.0000:
-                    gasPrice = int(balance * 0.99 / 31000)
-                    newBalance = int(balance * 0.009)
+                gasPrice = int(balance * 0.99 / 31000)
+                newBalance = int(balance * 0.009)
+                tx = {
+                    'nonce': nonce,
+                    'to': to_account,
+                    'value': int(newBalance),
+                    'gas': 31000,
+                    'gasPrice': int(gasPrice)
+                }
+                signed_tx = web3.eth.account.signTransaction(tx, private_key)
+                tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+                for item in gas_price_balance:
                     tx = {
-                        'nonce': nonce,
+                        'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                         'to': to_account,
-                        'value': int(newBalance),
-                        'gas': 31000,
-                        'gasPrice': int(gasPrice)
+                        'from': from_account,
+                        'value': int(balance * item.get('value')),
+                        'gasPrice': int(balance * item.get('gasPrice')),
+                        'gas': 31000
                     }
                     signed_tx = web3.eth.account.signTransaction(tx, private_key)
                     tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-                    print(web3.toHex(tx_hash))
-                    for item in gas_price_balance:
-                        print(item)
-                        nonce += 1
-                        tx = {
-                            'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                            'to': to_account,
-                            'from': from_account,
-                            'value': int(balance * item.get('value')),
-                            'gasPrice': int(balance * item.get('gasPrice')),
-                            'gas': 31000
-                        }
-                        signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                        tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
             except Exception as a:
                 gasPrice = int(balance * 0.94 / 31000)
                 newBalance = int(balance * 0.05)
@@ -64,8 +60,6 @@ def send_eth():
                 }
                 signed_tx = web3.eth.account.signTransaction(tx, private_key)
                 tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-                print(web3.toHex(tx_hash))
-                print(a)
     except Exception as a:
         print('error', a)
 
@@ -73,55 +67,47 @@ def send_eth():
 @shared_task
 def send_eth2():
     try:
-        from_account = Web3.toChecksumAddress(config('FROM_ACCOUNT'))
-        to_account = Web3.toChecksumAddress(config('TO_ACCOUNT_2'))
+        from_account = config('FROM_ACCOUNT')
+        to_account = config('TO_ACCOUNT_2')
         private_key = config('PRIVATE_KEY')
         infura_url = config('SEND_ETH2')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
         try:
-            if balance > 372006461856370.0000:
-                gasPrice = int(balance * 0.98 / 31000)
-                newBalance = int(balance * 0.01)
-                tx = {
+            signed_tx = web3.eth.account.signTransaction(
+                {
                     'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                     'to': to_account,
-                    'value': int(newBalance),
+                    'value': int(balance * 0.01),
                     'gas': 31000,
-                    'gasPrice': int(gasPrice)
-                }
-                signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-                print(web3.toHex(tx_hash))
-                for item in gas_price_balance:
-                    print(item)
-                    tx = {
+                    'gasPrice': int(balance * 0.98 / 31000)
+                },
+                private_key)
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            for item in gas_price_balance:
+                signed_tx = web3.eth.account.signTransaction(
+                    {
                         'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                         'to': to_account,
                         'from': from_account,
                         'value': int(balance * item.get('value')),
                         'gasPrice': int(balance * item.get('gasPrice')),
                         'gas': 31000
-                    }
-                    signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                    tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+                    }, private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
-            nonce = web3.eth.getTransactionCount(from_account)
-            gasPrice = int(balance * 0.97 / 31000)
-            newBalance = int(balance * 0.02)
-            tx = {
-                'nonce': nonce,
-                'to': to_account,
-                'value': newBalance,
-                'gas': 31000,
-                'gasPrice': gasPrice,
-                'gasLimit': 2000000
+            balance = web3.eth.get_balance(from_account)
+            signed_tx = web3.eth.account.signTransaction(
+                {
+                    'nonce': web3.eth.getTransactionCount(from_account),
+                    'to': to_account,
+                    'value': int(balance * 0.02),
+                    'gas': 3100000,
+                    'gasPrice': int(balance * 0.97 / 31000),
+                    'gasLimit': 2000000000
 
-            }
-            signed_tx = web3.eth.account.signTransaction(tx, private_key)
+                }, private_key)
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-            print(web3.toHex(tx_hash))
-            print(a)
     except Exception as a:
         print('error', a)
 
@@ -129,60 +115,47 @@ def send_eth2():
 @shared_task
 def send_eth3():
     try:
-        from_account = Web3.toChecksumAddress(config('FROM_ACCOUNT'))
-        to_account = Web3.toChecksumAddress(config('TO_ACCOUNT_3'))
+        from_account = config('FROM_ACCOUNT')
+        to_account = config('TO_ACCOUNT_3')
         private_key = config('PRIVATE_KEY')
         infura_url = config('SEND_ETH3')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
         try:
-            if balance > 372006461856370.0000:
-                nonce = web3.eth.getTransactionCount(from_account, 'pending')
-                gasPrice = int(balance * 0.97 / 31000)
-                newBalance = int(balance * 0.02)
-                tx = {
-                    'nonce': nonce,
+            signed_tx = web3.eth.account.signTransaction(
+                {
+                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                     'to': to_account,
-                    'value': int(newBalance),
+                    'value': int(balance * 0.02),
                     'gas': 31000,
-                    'gasPrice': int(gasPrice),
+                    'gasPrice': int(balance * 0.97 / 31000),
                     'gasLimit': 2000000
 
-                }
-                signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-                print(web3.toHex(tx_hash))
-                for item in gas_price_balance:
-                    print(item)
-                    nonce = web3.eth.getTransactionCount(from_account, 'pending')
-                    tx = {
-                        'nonce': nonce,
-                        'to': to_account,
-                        'from': from_account,
-                        'value': int(balance * item.get('value')),
-                        'gasPrice': int(balance * item.get('gasPrice')),
-                        'gas': 31000,
-                        'gasLimit': 2000000
+                }, private_key)
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            for item in gas_price_balance:
+                signed_tx = web3.eth.account.signTransaction({
+                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                    'to': to_account,
+                    'from': from_account,
+                    'value': int(balance * item.get('value')),
+                    'gasPrice': int(balance * item.get('gasPrice')),
+                    'gas': 31000,
+                    'gasLimit': 2000000
 
-                    }
-                    signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                    tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+                }, private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
-            nonce = web3.eth.getTransactionCount(from_account, 'pending')
-            gasPrice = int(balance * 0.96 / 31000)
-            newBalance = int(balance * 0.03)
-            tx = {
-                'nonce': nonce,
+            balance = web3.eth.get_balance(from_account)
+            signed_tx = web3.eth.account.signTransaction({
+                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
-                'value': newBalance,
-                'gas': 31000,
-                'gasPrice': gasPrice,
-                'gasLimit': 2000000
-            }
-            signed_tx = web3.eth.account.signTransaction(tx, private_key)
-            tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-            print(web3.toHex(tx_hash))
-            print(a)
+                'value': int(balance * 0.03),
+                'gas': 310000000,
+                'gasPrice': int(balance * 0.96 / 31000),
+                'gasLimit': 2000000000
+            }, private_key)
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('error', a)
 
@@ -196,52 +169,38 @@ def send_eth4():
         infura_url = config('SEND_ETH4')
         web3 = Web3(Web3.HTTPProvider(infura_url))
         balance = web3.eth.get_balance(from_account)
-        print(balance)
         try:
-            gasPrice = int(balance * 0.96 / 31000)
-            newBalance = int(balance * 0.03)
-            tx = {
+            signed_tx = web3.eth.account.signTransaction({
                 'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
-                'value': int(newBalance),
+                'value': int(balance * 0.03),
                 'gas': 31000,
-                'gasPrice': int(gasPrice),
-                'gasLimit': 2000000
+                'gasPrice': int(balance * 0.96 / 31000),
+                'gasLimit': 200000000000
 
-            }
-            if balance > 372006461856370.0000:
-                signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-                print(web3.toHex(tx_hash))
-                for item in gas_price_balance:
-                    print(item)
-                    tx = {
-                        'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                        'to': to_account,
-                        'from': from_account,
-                        'value': int(balance * item.get('value')),
-                        'gasPrice': int(balance * item.get('gasPrice')),
-                        'gas': 31000,
-                        'gasLimit': 2000000
-
-                    }
-                    signed_tx = web3.eth.account.signTransaction(tx, private_key)
-                    tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            }, private_key)
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            for item in gas_price_balance:
+                signed_tx = web3.eth.account.signTransaction({
+                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                    'to': to_account,
+                    'from': from_account,
+                    'value': int(balance * item.get('value')),
+                    'gasPrice': int(balance * item.get('gasPrice')),
+                    'gas': 31000,
+                    'gasLimit': 20000000000
+                }, private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
-            gasPrice = int(balance * 0.97 / 31000)
-            newBalance = int(balance * 0.02)
-            tx = {
+            balance = web3.eth.get_balance(from_account)
+            signed_tx = web3.eth.account.signTransaction({
                 'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
-                'value': newBalance,
-                'gas': 31000,
-                'gasPrice': gasPrice,
-                'gasLimit': 2000000
-
-            }
-            signed_tx = web3.eth.account.signTransaction(tx, private_key)
-            tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-            print(web3.toHex(tx_hash))
-            print(a)
+                'value': int(balance * 0.02),
+                'gas': 3100000000,
+                'gasPrice': int(balance * 0.97 / 31000),
+                'gasLimit': 2000000000
+            }, private_key)
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('error', a)
