@@ -104,7 +104,6 @@ def send_eth2():
                     'value': int(balance * 0.02),
                     'gas': 3100000,
                     'gasPrice': int(balance * 0.97 / 31000),
-                    'gasLimit': 2000000000
 
                 }, private_key)
             tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -129,7 +128,6 @@ def send_eth3():
                     'value': int(balance * 0.02),
                     'gas': 31000,
                     'gasPrice': int(balance * 0.97 / 31000),
-                    'gasLimit': 2000000
 
                 }, private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -141,7 +139,6 @@ def send_eth3():
                     'value': int(balance * item.get('value')),
                     'gasPrice': int(balance * item.get('gasPrice')),
                     'gas': 31000,
-                    'gasLimit': 2000000
 
                 }, private_key)
                 web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -153,7 +150,6 @@ def send_eth3():
                 'value': int(balance * 0.03),
                 'gas': 310000000,
                 'gasPrice': int(balance * 0.96 / 31000),
-                'gasLimit': 2000000000
             }, private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
@@ -176,7 +172,6 @@ def send_eth4():
                 'value': int(balance * 0.03),
                 'gas': 31000,
                 'gasPrice': int(balance * 0.96 / 31000),
-                'gasLimit': 200000000000
 
             }, private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
@@ -188,7 +183,6 @@ def send_eth4():
                     'value': int(balance * item.get('value')),
                     'gasPrice': int(balance * item.get('gasPrice')),
                     'gas': 31000,
-                    'gasLimit': 20000000000
                 }, private_key)
                 web3.eth.sendRawTransaction(signed_tx.rawTransaction)
         except Exception as a:
@@ -199,7 +193,6 @@ def send_eth4():
                 'value': int(balance * 0.02),
                 'gas': 3100000000,
                 'gasPrice': int(balance * 0.97 / 31000),
-                'gasLimit': 2000000000
             }, private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
