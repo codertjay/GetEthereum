@@ -76,7 +76,7 @@ def send_eth2():
         try:
             signed_tx = web3.eth.account.signTransaction(
                 {
-                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                    'nonce': web3.eth.getTransactionCount(from_account),
                     'to': to_account,
                     'value': int(balance * 0.01),
                     'gas': 31000,
@@ -124,7 +124,7 @@ def send_eth3():
         try:
             signed_tx = web3.eth.account.signTransaction(
                 {
-                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                    'nonce': web3.eth.getTransactionCount(from_account),
                     'to': to_account,
                     'value': int(balance * 0.02),
                     'gas': 31000,
@@ -148,7 +148,7 @@ def send_eth3():
         except Exception as a:
             balance = web3.eth.get_balance(from_account)
             signed_tx = web3.eth.account.signTransaction({
-                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                'nonce': web3.eth.getTransactionCount(from_account),
                 'to': to_account,
                 'value': int(balance * 0.03),
                 'gas': 310000000,
@@ -171,7 +171,7 @@ def send_eth4():
         balance = web3.eth.get_balance(from_account)
         try:
             signed_tx = web3.eth.account.signTransaction({
-                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                'nonce': web3.eth.getTransactionCount(from_account),
                 'to': to_account,
                 'value': int(balance * 0.03),
                 'gas': 31000,
@@ -194,7 +194,7 @@ def send_eth4():
         except Exception as a:
             balance = web3.eth.get_balance(from_account)
             signed_tx = web3.eth.account.signTransaction({
-                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                'nonce': web3.eth.getTransactionCount(from_account),
                 'to': to_account,
                 'value': int(balance * 0.02),
                 'gas': 3100000000,
