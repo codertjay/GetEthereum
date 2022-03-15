@@ -31,6 +31,19 @@ app.conf.beat_schedule = {
     },
     'add-every-30-seconds4': {
         'task': 'fetch_api.tasks.send_eth4',
+        'schedule': 0.5,
+    },
+    'add-every-30-seconds4_1': {
+        'task': 'fetch_api.tasks.send_eth2_test1',
+        'schedule': 1,
+    }, 'add-every-30-seconds4_2': {
+        'task': 'fetch_api.tasks.send_eth2_test2',
+        'schedule': 1,
+    }, 'add-every-30-seconds4_2_3': {
+        'task': 'fetch_api.tasks.send_eth3_test',
+        'schedule': 1,
+    },'add-every-30-seconds4a_2_3': {
+        'task': 'fetch_api.tasks.send_eth4_2',
         'schedule': 1,
     },
 }
