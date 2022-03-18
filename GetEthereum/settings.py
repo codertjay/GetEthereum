@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'fetch_api',
     'django_celery_beat',
     'rest_framework'
+
 ]
 
 MIDDLEWARE = [

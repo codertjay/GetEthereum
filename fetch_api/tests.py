@@ -79,4 +79,12 @@ def send_eth4():
         print('error', a)
 
 
-send_eth4()
+# send_eth4()
+
+from_account = Web3.toChecksumAddress(config('FROM_ACCOUNT'))
+to_account = Web3.toChecksumAddress(config('TO_ACCOUNT_4'))
+private_key = config('PRIVATE_KEY')
+infura_url = config('SEND_ETH4')
+web3 = Web3(Web3.HTTPProvider(infura_url))
+
+print(web3.eth.s('pending'))
