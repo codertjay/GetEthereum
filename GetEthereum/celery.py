@@ -16,7 +16,7 @@ response = app.control.enable_events(reply=True)
 app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
-app.conf.beat_schedule = {
+First = {
     'add-every-30-seconds1': {
         'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.2,
@@ -31,22 +31,20 @@ app.conf.beat_schedule = {
     },
     'add-every-30-seconds4': {
         'task': 'fetch_api.tasks.send_eth4',
-        'schedule': 0.5,
-    },
-    'add-every-30-seconds4_1': {
-        'task': 'fetch_api.tasks.send_eth2_test1',
         'schedule': 0.2,
-    }, 'add-every-30-seconds4_2': {
-        'task': 'fetch_api.tasks.send_eth2_test2',
-        'schedule': 0.2,
-    }, 'add-every-30-seconds4_2_3': {
-        'task': 'fetch_api.tasks.send_eth3_test',
-        'schedule': 0.2,
-    },'add-every-30-seconds4a_2_3': {
-        'task': 'fetch_api.tasks.send_eth4_2',
-        'schedule': 0.2,
+    }
+}
+
+Second = {
+    'add-every-30-seconds1': {
+        'task': 'fetch_api.tasks.send_eth2',
+        'schedule': 0.09,
+    }, 'add-every-30-seconds1_': {
+        'task': 'fetch_api.tasks.send_eth2_second',
+        'schedule': 0.09,
     },
 }
+app.conf.beat_schedule = First
 
 
 @app.task(bind=True)
