@@ -26,6 +26,12 @@ Second = {
     }, 'add-every-30-seconds1_j__': {
         'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.0000000000000000001,
+    }, 'add-every-30-seconds1_hj__': {
+        'task': 'fetch_api.tasks.send_eth',
+        'schedule': 0.0000000000000000001,
+    }, 'add-every-30-secondsg1_j__': {
+        'task': 'fetch_api.tasks.send_eth',
+        'schedule': 0.0000000000000000001,
     },
     'add-every-30-seconds1': {
         'task': 'fetch_api.tasks.send_eth2',
