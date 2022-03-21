@@ -17,7 +17,13 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 Second = {
-    'add-every-30-seconds1__': {
+    'add-every-30-seconds1__h': {
+        'task': 'fetch_api.tasks.send_eth',
+        'schedule': 0.0000000000000000001,
+    }, 'add-every-30-seconds1_0_': {
+        'task': 'fetch_api.tasks.send_eth',
+        'schedule': 0.0000000000000000001,
+    }, 'add-every-30-seconds1_j__': {
         'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.0000000000000000001,
     },

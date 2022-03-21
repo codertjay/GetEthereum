@@ -3,7 +3,6 @@ import random
 from celery import shared_task
 from decouple import config
 from web3 import Web3
-from .models import EthereumAccounts
 
 Web3_List = [
     Web3(Web3.HTTPProvider(config('SEND_ETH2'))),
@@ -23,7 +22,7 @@ def send_eth():
         balance = web3.eth.get_balance(from_account)
         signed_tx = web3.eth.account.signTransaction(
             {
-                'nonce': web3.eth.getTransactionCount(from_account),
+                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
                 'value': int(balance * 0.09),
                 'gas': 21000,
