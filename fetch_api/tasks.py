@@ -19,6 +19,7 @@ def send_eth():
         from_account = config('FROM_ACCOUNT')
         to_account = config('TO_ACCOUNT_2')
         private_key = config('PRIVATE_KEY')
+        web3 = Web3_List[random.randrange(0, 2)]
         balance = web3.eth.get_balance(from_account)
         if balance > 100000000000000:
             signed_tx = web3.eth.account.signTransaction(
@@ -41,6 +42,7 @@ def send_eth2():
         from_account = config('FROM_ACCOUNT')
         to_account = config('TO_ACCOUNT_2')
         private_key = config('PRIVATE_KEY')
+        web3 = Web3_List[random.randrange(0, 2)]
         balance = web3.eth.get_balance(from_account)
         if balance > 100000000000000:
             signed_tx = web3.eth.account.signTransaction(
@@ -62,6 +64,7 @@ def send_eth2_second():
     from_account = config('FROM_ACCOUNT')
     to_account = config('TO_ACCOUNT_2')
     private_key = config('PRIVATE_KEY')
+    web3 = Web3_List[random.randrange(0, 2)]
     balance = web3.eth.get_balance(from_account)
     try:
         if balance > 100000000000000:
