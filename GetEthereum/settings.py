@@ -14,6 +14,10 @@ from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from queue import Queue
+
+from kombu import Exchange
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -127,7 +131,28 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Lagos'
-# CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_DEFAULT_DELIVERY_MODE = 'transient'
+CELERY_TASK_RESULT_EXPIRES = 60
+CELERY_IGNORE_RESULT = True
+
+CELERY_CONCURRENCY = 6
+
+CELERY_TASK_ACKS_LATE = True  # Acknowledge pool when task is over
+CELERY_TASK_REJECT_ON_WORKER_LOST = True
+
+# Celery Monitor Settings
+CELERY_MONITORS_EXPIRE_SUCCESS = timedelta(hours=1)
+CELERY_MONITORS_EXPIRE_ERROR = timedelta(days=3)
+CELERY_MONITORS_EXPIRE_PENDING = timedelta(days=5)
+
+CELERY_EVENT_QUEUE_EXPIRES = 60
+CELERY_EVENT_QUEUE_TTL = 5
+
+CELERY_TASK_TIME_LIMIT = 90
+CELERY_TASK_SOFT_TIME_LIMIT = 60
+
+CELERY_TASK_ALWAYS_EAGER = True
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
