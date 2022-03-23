@@ -2,13 +2,17 @@ import os
 
 from celery import Celery, shared_task
 from celery.schedules import crontab
+from decouple import config
 from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'GetEthereum.settings')
 
-app = Celery('GetEthereum')
+if config('BROKER_URL') == 'EXIST':
+    app = Celery('GetEthereum', broker_url='redis://127.0.0.1:6379/0')
+else:
+    app = Celery('GetEthereum')
 
 app.config_from_object('django.conf:settings')
 
