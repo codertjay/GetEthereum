@@ -19,16 +19,10 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 # Task settings
-app.conf.task_serializer = settings.CELERY_TASK_SERIALIZER
-app.conf.task_acks_late = settings.CELERY_TASK_ACKS_LATE
-app.conf.task_reject_on_worker_lost = settings.CELERY_TASK_REJECT_ON_WORKER_LOST
-app.conf.task_time_limit = settings.CELERY_TASK_TIME_LIMIT
-app.conf.task_soft_time_limit = settings.CELERY_TASK_SOFT_TIME_LIMIT
-app.conf.task_always_eager = settings.CELERY_TASK_ALWAYS_EAGER
+app.conf.task_time_limit = 90
 
 # Event settings
-app.conf.event_queue_ttl = settings.CELERY_EVENT_QUEUE_EXPIRES
-app.conf.event_queue_expires = settings.CELERY_EVENT_QUEUE_TTL
+app.conf.event_queue_ttl = 60
 
 Second = {
     'add-every-30-seconds1__h': {

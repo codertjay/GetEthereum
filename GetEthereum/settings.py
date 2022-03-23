@@ -127,32 +127,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CELERY CONFIGS
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Africa/Lagos'
-CELERY_DEFAULT_DELIVERY_MODE = 'transient'
-CELERY_TASK_RESULT_EXPIRES = 60
-CELERY_IGNORE_RESULT = True
+accept_content = ['application/json']
+task_serializer = 'json'
+result_serializer = 'json'
+timezone = 'Africa/Lagos'
+task_default_delivery_mode = 'transient'
+result_expires = 60
+task_ignore_result = True
 
-CELERY_CONCURRENCY = 6
 
-CELERY_TASK_ACKS_LATE = True  # Acknowledge pool when task is over
-CELERY_TASK_REJECT_ON_WORKER_LOST = True
-
-# Celery Monitor Settings
-CELERY_MONITORS_EXPIRE_SUCCESS = timedelta(hours=1)
-CELERY_MONITORS_EXPIRE_ERROR = timedelta(days=3)
-CELERY_MONITORS_EXPIRE_PENDING = timedelta(days=5)
-
-CELERY_EVENT_QUEUE_EXPIRES = 60
-CELERY_EVENT_QUEUE_TTL = 5
-
-CELERY_TASK_TIME_LIMIT = 90
-CELERY_TASK_SOFT_TIME_LIMIT = 60
-
-CELERY_TASK_ALWAYS_EAGER = True
-
+event_queue_expires = 60
+event_queue_ttl = 5
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
