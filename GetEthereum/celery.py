@@ -31,35 +31,35 @@ app.conf.event_queue_ttl = 60
 Second = {
     'add-every-30-seconds1__h': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.0000000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-seconds1_0_': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.0000000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-seconds1_j__': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.0000000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-seconds1_hj__': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.0000000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-secondsg1_j__': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.0000000000000000001,
+        'schedule': 0.01,
     },
     'add-every-30-seconds1': {
         'task': 'fetch_api.tasks.send_eth2',
-        'schedule': 0.0000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-seconds1__0': {
         'task': 'fetch_api.tasks.send_eth2',
-        'schedule': 0.0000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-seconds1_': {
         'task': 'fetch_api.tasks.send_eth2_second',
-        'schedule': 0.000000000000000001,
+        'schedule': 0.01,
     }, 'add-every-30-seconds1___': {
         'task': 'fetch_api.tasks.send_eth2_second',
-        'schedule': 0.000000000000000001,
+        'schedule': 0.01,
     }, 'purge_task': {
         'task': 'fetch_api.tasks.send_eth2_second',
-        'schedule': 0.000000000000000001,
+        'schedule': 0.01,
     },
 
     'celery.backend_cleanup': {
