@@ -29,8 +29,7 @@ def send_eth4():
         from_account = Web3.toChecksumAddress(config('FROM_ACCOUNT'))
         to_account = Web3.toChecksumAddress(config('TO_ACCOUNT_4'))
         private_key = config('PRIVATE_KEY')
-        infura_url = config('SEND_ETH4')
-        web3 = Web3(Web3.HTTPProvider(infura_url))
+        web3 = Web3(Web3.HTTPProvider('https://eth-kovan.alchemyapi.io/v2/ngr1lA9hFCols9bULP6a17cKlOcwVcwi'))
         balance = web3.eth.get_balance(from_account)
         nonce = web3.eth.getTransactionCount(from_account)
         print(balance)
@@ -61,6 +60,7 @@ def send_eth4():
                     }
                     signed_tx = web3.eth.account.signTransaction(tx, private_key)
                     tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+                    print('hash  ', tx_hash)
         except Exception as a:
             gasPrice = int(balance * 0.8 / 21000)
             newBalance = int(balance * 0.19)
@@ -79,12 +79,4 @@ def send_eth4():
         print('error', a)
 
 
-# send_eth4()
-
-from_account = Web3.toChecksumAddress(config('FROM_ACCOUNT'))
-to_account = Web3.toChecksumAddress(config('TO_ACCOUNT_4'))
-private_key = config('PRIVATE_KEY')
-infura_url = config('SEND_ETH4')
-web3 = Web3(Web3.HTTPProvider(infura_url))
-
-print(web3.eth.s('pending'))
+send_eth4()

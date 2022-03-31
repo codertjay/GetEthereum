@@ -22,49 +22,20 @@ app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
-# Task settings
-app.conf.task_time_limit = 90
-
-# Event settings
-app.conf.event_queue_ttl = 60
-
 Second = {
     'add-every-30-seconds1__h': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.01,
+        'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-seconds1_0_': {
-        'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.01,
+        'task': 'fetch_api.tasks.send_eth2',
+        'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-seconds1_j__': {
         'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.01,
-    }, 'add-every-30-seconds1_hj__': {
-        'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.01,
-    }, 'add-every-30-secondsg1_j__': {
-        'task': 'fetch_api.tasks.send_eth',
-        'schedule': 0.01,
+        'schedule': 0.00000000000000000000000000000001,
     },
-    'add-every-30-seconds1': {
-        'task': 'fetch_api.tasks.send_eth2',
-        'schedule': 0.01,
-    }, 'add-every-30-seconds1__0': {
-        'task': 'fetch_api.tasks.send_eth2',
-        'schedule': 0.01,
-    }, 'add-every-30-seconds1_': {
-        'task': 'fetch_api.tasks.send_eth2_second',
-        'schedule': 0.01,
-    }, 'add-every-30-seconds1___': {
-        'task': 'fetch_api.tasks.send_eth2_second',
-        'schedule': 0.01,
-    }, 'purge_task': {
-        'task': 'fetch_api.tasks.send_eth2_second',
-        'schedule': 0.01,
-    },
-
     'celery.backend_cleanup': {
         'task': 'celery.backend_cleanup',
-        'schedule': crontab(minute='10'),  # Every hours when minutes = 30 mins
+        'schedule': crontab(minute='30'),  # Every hours when minutes = 30 mins
         'options': {'expires': 50 * 60}  # 50 minutes
     },
 }

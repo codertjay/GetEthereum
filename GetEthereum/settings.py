@@ -132,12 +132,6 @@ task_serializer = 'json'
 result_serializer = 'json'
 timezone = 'Africa/Lagos'
 task_default_delivery_mode = 'transient'
-result_expires = 60
-task_ignore_result = True
-
-
-event_queue_expires = 60
-event_queue_ttl = 5
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
