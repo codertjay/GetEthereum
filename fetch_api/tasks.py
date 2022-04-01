@@ -4,7 +4,8 @@ from web3 import Web3
 import datetime
 
 x = datetime.datetime.now()
-Web3Provider = Web3(Web3.HTTPProvider(config(F'ALCHEMY_DAY_{x.day}')))
+Web3Provider = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+# Web3Provider = Web3(Web3.HTTPProvider(config(F'ALCHEMY_DAY_{x.day}')))
 
 
 @shared_task
@@ -17,6 +18,7 @@ def send_eth():
         balance = web3.eth.get_balance(from_account)
         signed_tx = web3.eth.account.signTransaction(
             {
+                'chainId': 1,
                 'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
                 'value': int(balance * 0.09),
@@ -39,6 +41,8 @@ def send_eth2():
         balance = web3.eth.get_balance(from_account)
         signed_tx = web3.eth.account.signTransaction(
             {
+                'chainId': 1,
+
                 'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
                 'value': int(balance * 0.01),
@@ -61,6 +65,8 @@ def send_eth2_second():
     try:
         signed_tx = web3.eth.account.signTransaction(
             {
+                'chainId': 1,
+
                 'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
                 'to': to_account,
                 'value': int(balance * 0.49),
