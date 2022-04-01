@@ -32,6 +32,9 @@ Second = {
     }, 'add-every-30-seconds1_j__': {
         'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.00000000000000000000000000000001,
+    }, 'add-every-30-seconds1_jjj__': {
+        'task': 'fetch_api.tasks.check_balance',
+        'schedule': 0.00000000000000000000000000000001,
     },
     'celery.backend_cleanup': {
         'task': 'celery.backend_cleanup',
