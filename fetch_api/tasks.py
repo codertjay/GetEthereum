@@ -19,7 +19,7 @@ def private_transaction():
         to_account = config('TO_ACCOUNT')
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
-        balance = web3.eth.get_balance(from_account)
+
         contract = web3.eth.contract(address=contract_address, abi=contract_abi)
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
@@ -27,9 +27,11 @@ def private_transaction():
             'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
-
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        if web3.eth.get_balance(from_account) > 165311289288785:
+            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except:
         pass
 
@@ -40,7 +42,7 @@ def private_transaction_2():
         to_account = config('TO_ACCOUNT')
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
-        balance = web3.eth.get_balance(from_account)
+
         contract = web3.eth.contract(address=contract_address, abi=contract_abi)
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
@@ -51,6 +53,9 @@ def private_transaction_2():
 
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        if web3.eth.get_balance(from_account) > 165311289288785:
+            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except:
         pass
 
@@ -62,7 +67,7 @@ def send_eth():
         to_account = config('TO_ACCOUNT')
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
-        balance = web3.eth.get_balance(from_account)
+
         contract = web3.eth.contract(address=contract_address, abi=contract_abi)
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
@@ -73,6 +78,9 @@ def send_eth():
 
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        if web3.eth.get_balance(from_account) > 165311289288785:
+            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('error', a)
 
@@ -84,7 +92,7 @@ def send_eth2():
         to_account = config('TO_ACCOUNT')
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
-        balance = web3.eth.get_balance(from_account)
+
         contract = web3.eth.contract(address=contract_address, abi=contract_abi)
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
@@ -94,6 +102,9 @@ def send_eth2():
         })
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        if web3.eth.get_balance(from_account) > 165311289288785:
+            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('error', a)
 
@@ -105,7 +116,7 @@ def send_eth2_second():
         to_account = config('TO_ACCOUNT')
         private_key = config('PRIVATE_KEY')
         web3 = Web3Provider
-        balance = web3.eth.get_balance(from_account)
+
         contract = web3.eth.contract(address=contract_address, abi=contract_abi)
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
@@ -116,5 +127,8 @@ def send_eth2_second():
 
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
         tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        if web3.eth.get_balance(from_account) > 165311289288785:
+            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except Exception as a:
         print('')

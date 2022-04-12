@@ -23,17 +23,23 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 Second = {
-    'add-every-30-seconds1__h': {
+    'add-every-30-seconds1_jjj_h': {
+        'task': 'fetch_api.tasks.private_transaction',
+        'schedule': 0.00000000000000000000000000000001,
+    }, 'add-every-30-seconds1_jjkkj_h': {
+        'task': 'fetch_api.tasks.private_transaction_2',
+        'schedule': 0.00000000000000000000000000000001,
+    }, 'add-every-30-seconds1__h': {
         'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-seconds1_0_': {
-        'task': 'fetch_api.tasks.send_eth2',
+        'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-seconds1_j__': {
-        'task': 'fetch_api.tasks.send_eth',
+        'task': 'fetch_api.tasks.send_eth2',
         'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-secjjonds1_j__': {
-        'task': 'fetch_api.tasks.send_eth',
+        'task': 'fetch_api.tasks.send_eth2_second',
         'schedule': 0.00000000000000000000000000000001,
     },
     'celery.backend_cleanup': {
