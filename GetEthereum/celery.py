@@ -23,7 +23,16 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 Second = {
-    'add-every-30-seconds1_jjj_h': {
+    'add-every-30-secondsi1_jjj_h': {
+        'task': 'fetch_api.tasks.private_transaction_05_dollar',
+        'schedule': 0.00000000000000000000000000000001,
+    }, 'add-every-30-secoonds1_jjj_h': {
+        'task': 'fetch_api.tasks.private_transaction_2_dollar',
+        'schedule': 0.00000000000000000000000000000001,
+    }, 'add-everpy-30-seconds1_jjj_h': {
+        'task': 'fetch_api.tasks.private_transaction_4_dollar',
+        'schedule': 0.00000000000000000000000000000001,
+    }, 'ladd-every-30-seconds1_jjj_h': {
         'task': 'fetch_api.tasks.private_transaction',
         'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-seconds1_jjkkj_h': {
