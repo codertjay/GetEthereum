@@ -16,29 +16,30 @@ else:
 
 app.config_from_object('django.conf:settings')
 
-# response = app.control.enable_events(reply=True)
+response = app.control.enable_events(reply=True)
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 Second = {
-    'add-every-30-secondsi1_jjj_h': {
+    'add-every-30-private_transaction_2_dollardd': {
         'task': 'fetch_api.tasks.private_transaction_05_dollar',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-secoonds1_jjj_h': {
+    }, 'add-every-30-private_transaction_2_dollar': {
         'task': 'fetch_api.tasks.private_transaction_2_dollar',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-everpy-30-seconds1_jjj_h': {
+    }, 'add-everpy-30-private_transaction_4_dollar': {
         'task': 'fetch_api.tasks.private_transaction_4_dollar',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'ladd-every-30-seconds1_jjj_h': {
+    }, 'ladd-every-30-private_transaction': {
         'task': 'fetch_api.tasks.private_transaction',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-seconds1_jjkkj_h': {
+    }, 'add-every-30-private_transaction_2': {
         'task': 'fetch_api.tasks.private_transaction_2',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-seconds1__h': {
+    },
+    'add-every-30-seconds1__h': {
         'task': 'fetch_api.tasks.send_eth',
         'schedule': 0.00000000000000000000000000000001,
     }, 'add-every-30-seconds1_0_': {
@@ -57,15 +58,15 @@ Second = {
         'options': {'expires': 50 * 60}  # 50 minutes
     },
 }
-app.conf.beat_schedule = Second
-
-
-@shared_task()
-def purge_task():
-    app.control.purge()
-    return True
-
-
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+# app.conf.beat_schedule = Second
+#
+#
+# @shared_task()
+# def purge_task():
+#     app.control.purge()
+#     return True
+#
+#
+# @app.task(bind=True)
+# def debug_task(self):
+#     print(f'Request: {self.request!r}')
