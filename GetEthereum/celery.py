@@ -58,7 +58,7 @@ Second = {
         'options': {'expires': 50 * 60}  # 50 minutes
     },
 }
-# app.conf.beat_schedule = Second
+app.conf.beat_schedule = Second
 #
 #
 # @shared_task()
