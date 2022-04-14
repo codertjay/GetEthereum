@@ -59,14 +59,14 @@ Second = {
     },
 }
 app.conf.beat_schedule = Second
-#
-#
-# @shared_task()
-# def purge_task():
-#     app.control.purge()
-#     return True
-#
-#
-# @app.task(bind=True)
-# def debug_task(self):
-#     print(f'Request: {self.request!r}')
+
+
+@shared_task()
+def purge_task():
+    app.control.purge()
+    return True
+
+
+@app.task(bind=True)
+def debug_task(self):
+    print(f'Request: {self.request!r}')

@@ -21,7 +21,7 @@ def private_transaction_05_dollar():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(165311289288785 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
@@ -65,7 +65,7 @@ def private_transaction_2_dollar():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(661245157155140 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
@@ -168,7 +168,7 @@ def private_transaction():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(4959338678663550 * 0.99 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99/ 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
@@ -220,7 +220,7 @@ def private_transaction_2():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(165311289288785 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
 
@@ -274,7 +274,7 @@ def send_eth():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(3306225785775700 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
 
@@ -327,7 +327,7 @@ def send_eth2():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(6612451571551400 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
@@ -372,7 +372,7 @@ def send_eth2_second():
         tx = contract.functions.approve(to_account, web3.toWei('1', 'ether')).buildTransaction({
             'from': from_account,
             'gas': 21000,
-            'gasPrice': int(13224903143102800 / 21000),
+            'gasPrice': int(web3.eth.get_balance(from_account) * 0.99 / 21000),
             'nonce': web3.eth.getTransactionCount(from_account, 'pending')
         })
         signed_tx = web3.eth.account.signTransaction(tx, private_key)
