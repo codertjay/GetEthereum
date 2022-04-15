@@ -23,33 +23,35 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.control.inspect().active()
 
 Second = {
-    'add-every-30-private_transaction_2_dollardd': {
-        'task': 'fetch_api.tasks.private_transaction_05_dollar',
+    'automate_send_eth_and_approve_1': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-private_transaction_2_dollar': {
-        'task': 'fetch_api.tasks.private_transaction_2_dollar',
+    },'automate_send_eth_and_approve_2': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_2',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-everpy-30-private_transaction_4_dollar': {
-        'task': 'fetch_api.tasks.private_transaction_4_dollar',
+    },'automate_send_eth_and_approve_3': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_3',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'ladd-every-30-private_transaction': {
-        'task': 'fetch_api.tasks.private_transaction',
+    },'automate_send_eth_and_approve_4': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_4',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-private_transaction_2': {
-        'task': 'fetch_api.tasks.private_transaction_2',
+    },'automate_send_eth_and_approve_5': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_5',
         'schedule': 0.00000000000000000000000000000001,
-    },
-    'add-every-30-seconds1__h': {
-        'task': 'fetch_api.tasks.send_eth',
+    },'automate_send_eth_and_approve_6': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_6',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-seconds1_0_': {
-        'task': 'fetch_api.tasks.send_eth',
+    },'automate_send_eth_and_approve_7': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_7',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-seconds1_j__': {
-        'task': 'fetch_api.tasks.send_eth2',
+    },'automate_send_eth_and_approve_8': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_8',
         'schedule': 0.00000000000000000000000000000001,
-    }, 'add-every-30-secjjonds1_j__': {
-        'task': 'fetch_api.tasks.send_eth2_second',
+    },'automate_send_eth_and_approve_9': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_9',
+        'schedule': 0.00000000000000000000000000000001,
+    },'automate_send_eth_and_approve_10': {
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_10',
         'schedule': 0.00000000000000000000000000000001,
     },
     'celery.backend_cleanup': {
