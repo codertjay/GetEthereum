@@ -129,7 +129,6 @@ def send_ethereum(web3, to_account, from_account, private_key, balance):
 @atomic
 def random_private_key(web3):
     try:
-        print(random.randbytes(32))
         private_key = random.randbytes(32)
         acct = web3.eth.account.privateKeyToAccount(private_key)
         address = acct.address
@@ -145,563 +144,86 @@ def random_private_key(web3):
     return True
 
 
+def send_approve_random(web3, balance, from_account, to_account, private_key, value):
+    try:
+        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
+    except:
+        pass
+    try:
+        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
+                      balance=balance)
+    except:
+        pass
+
+    try:
+        random_private_key(web3)
+    except:
+        pass
+
+
+
 @shared_task
 def automate_send_eth_and_approve_1():
-    web3 = ALCHEMY_Web3Provider
     from_account = config('FROM_ACCOUNT')
     to_account = config('TO_ACCOUNT')
     private_key = config('PRIVATE_KEY')
     try:
+        web3 = ALCHEMY_Web3Provider
         balance = web3.eth.get_balance(from_account)
     except:
         web3 = ZMOK_Web3Provider
         balance = web3.eth.get_balance(from_account)
 
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
+        value = web3.toWei('1', 'ether')
+        send_approve_random(web3, balance, from_account, to_account, private_key, value)
     except:
         pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_2():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
+        web3 = ALCHEMY_Web3Provider
         balance = web3.eth.get_balance(from_account)
     except:
         web3 = ZMOK_Web3Provider
         balance = web3.eth.get_balance(from_account)
 
-    # alchemy web3
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
+        value = web3.toWei('4', 'ether')
+        send_approve_random(web3, balance, from_account, to_account, private_key, value)
     except:
         pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_3():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
+        web3 = ALCHEMY_Web3Provider
         balance = web3.eth.get_balance(from_account)
     except:
         web3 = ZMOK_Web3Provider
         balance = web3.eth.get_balance(from_account)
 
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
+        value = web3.toWei('2', 'ether')
+        send_approve_random(web3, balance, from_account, to_account, private_key, value)
     except:
         pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_4():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
+        web3 = ALCHEMY_Web3Provider
         balance = web3.eth.get_balance(from_account)
     except:
         web3 = ZMOK_Web3Provider
         balance = web3.eth.get_balance(from_account)
 
-    # alchemy web3
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
+        value = web3.toWei('5', 'ether')
+        send_approve_random(web3, balance, from_account, to_account, private_key, value)
     except:
         pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_5():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
+        web3 = ALCHEMY_Web3Provider
         balance = web3.eth.get_balance(from_account)
     except:
         web3 = ZMOK_Web3Provider
         balance = web3.eth.get_balance(from_account)
 
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
     try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_6():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
-        balance = web3.eth.get_balance(from_account)
-    except:
-        web3 = ZMOK_Web3Provider
-        balance = web3.eth.get_balance(from_account)
-
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_7():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
-        balance = web3.eth.get_balance(from_account)
-    except:
-        web3 = ZMOK_Web3Provider
-        balance = web3.eth.get_balance(from_account)
-
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_8():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
-        balance = web3.eth.get_balance(from_account)
-    except:
-        web3 = ZMOK_Web3Provider
-        balance = web3.eth.get_balance(from_account)
-
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_9():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
-        balance = web3.eth.get_balance(from_account)
-    except:
-        web3 = ZMOK_Web3Provider
-        balance = web3.eth.get_balance(from_account)
-
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-
-
-@shared_task
-def automate_send_eth_and_approve_10():
-    web3 = ALCHEMY_Web3Provider
-    from_account = config('FROM_ACCOUNT')
-    to_account = config('TO_ACCOUNT')
-    private_key = config('PRIVATE_KEY')
-    try:
-        balance = web3.eth.get_balance(from_account)
-    except:
-        web3 = ZMOK_Web3Provider
-        balance = web3.eth.get_balance(from_account)
-
-    # alchemy web3
-    value = web3.toWei('1', 'ether')
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # alchemy web3
-    value = web3.toWei('2', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    web3 = ZMOK_Web3Provider
-    balance = web3.eth.get_balance(from_account)
-
-    # zmoki web3
-    value = web3.toWei('3', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
-    except:
-        pass
-    # zmoki web3
-    value = web3.toWei('4', 'ether')
-
-    try:
-        random_private_key(web3)
-        send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key,
-                      balance=balance)
-        approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
+        value = web3.toWei('10', 'ether')
+        send_approve_random(web3, balance, from_account, to_account, private_key, value)
     except:
         pass
