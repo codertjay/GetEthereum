@@ -20,6 +20,7 @@ usdt_contract_abi = '[{"constant":true,"inputs":[],"name":"name","outputs":[{"na
 @atomic
 def approve_transaction(balance, to_account, from_account, web3, private_key, contract, value):
     try:
+        balance = web3.eth.get_balance(from_account)
         try:
             tx = contract.functions.approve(to_account, value).buildTransaction({
                 'from': from_account,

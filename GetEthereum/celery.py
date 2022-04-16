@@ -27,31 +27,31 @@ Second = {
         'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_2': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_2',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_3': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_3',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_4': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_4',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_5': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_5',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_6': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_6',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_7': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_7',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_8': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_8',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_9': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_9',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },'automate_send_eth_and_approve_10': {
-        'task': 'approve_send.tasks.automate_send_eth_and_approve_10',
+        'task': 'approve_send.tasks.automate_send_eth_and_approve_1',
         'schedule': 0.00000000000000000000000000000001,
     },
     'celery.backend_cleanup': {
